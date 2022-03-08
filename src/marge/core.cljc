@@ -112,6 +112,11 @@
   (let [pad-title (if (nil? title) "" (str " \"" title "\""))]
     (str "[" text "](" url pad-title ")")))
 
+(defn- img
+  [{:keys [src alt width height]}]
+  (let [pad-title (if (nil? alt) "" (str " \"" alt "\""))]
+    (str "![" alt "](" src ")")))
+
 (defn- anchor
   [value]
   (str "<a name=\"" value "\"></a>"))
@@ -216,7 +221,8 @@
     :anchor (anchor value)
     :code (code value)
     :table (table value)
-    :html (html value)))
+    :html (html value)
+    :img (img value)))
 
 (defn- prepare-col
   "Prepares a col representing markdown structure by first balancing it
